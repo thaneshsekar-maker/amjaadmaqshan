@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amjaad Maqshan LLC | Interactive Solutions Portal</title>
+    
+    <!-- WhatsApp Sharing Preview (Automatic) -->
+    <meta property="og:title" content="Amjaad Maqshan LLC - Equipment Rental">
+    <meta property="og:description" content="JSRS Certified SME providing high-performance machinery for PDO, OXY, and Civil sectors in Oman.">
+    <meta property="og:type" content="website">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; background-color: #FAF9F6; transition: all 0.3s ease; }
+        
+        .tab-active { border-bottom: 4px solid #FFD700; color: #0F172A; font-weight: 800; }
+        
+        .interactive-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+        .interactive-card:hover {
+            transform: translateY(-5px);
+            background: white;
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+        }
+
+        /* Language Specific Styles */
+        [lang="ar"] { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        [lang="ar"] .ml-4 { margin-left: 0; margin-right: 1rem; }
+        [lang="ar"] .mr-4 { margin-right: 0; margin-left: 1rem; }
+        
+        .whatsapp-pulse { animation: pulse-green 2s infinite; }
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .view-content { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="text-slate-800 antialiased overflow-x-hidden" id="main-body" lang="en" dir="ltr">
+
+    <!-- Navigation Header -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo / Home Trigger -->
+                <div class="flex items-center space-x-4 cursor-pointer" onclick="navigate('home')">
+                    <div class="bg-slate-900 p-2 rounded-xl border-b-2 border-yellow-400">
+                        <i class="fas fa-truck-pickup text-yellow-400 text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-lg font-900 uppercase block tracking-tighter leading-none">Amjaad Maqshan</span>
+                        <span class="text-[9px] uppercase tracking-[0.3em] text-slate-500 font-bold" 
+                              data-en="Equipment Rental LLC" 
+                              data-ar="لتأجير المعدات ش.م.م">Equipment Rental LLC</span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-1 font-bold text-[11px] uppercase tracking-widest">
+                    <button onclick="navigate('home')" id="tab-home" class="px-5 py-2 rounded-lg hover:bg-slate-50 transition" data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</button>
+                    <button onclick="navigate('fleet')" id="tab-fleet" class="px-5 py-2 rounded-lg hover:bg-slate-50 transition" data-en="Fleet Finder" data-ar="البحث عن المعدات">Fleet Finder</button>
+                    <button onclick="navigate('ecosystem')" id="tab-ecosystem" class="px-5 py-2 rounded-lg hover:bg-slate-50 transition" data-en="Ecosystem" data-ar="الشركاء">Ecosystem</button>
+                    <button onclick="toggleLang()" class="bg-slate-900 text-white px-4 py-2 rounded-lg ml-4 shadow-lg transition transform active:scale-95"><span id="lang-label">ARABIC</span></button>
+                </div>
+
+                <!-- Mobile Header Actions -->
+                <div class="md:hidden flex items-center space-x-4">
+                    <button onclick="toggleLang()" class="text-[10px] font-black px-2 py-1 bg-slate-100 rounded border border-slate-200">AR/EN</button>
+                    <button onclick="toggleMobileMenu()" class="text-slate-900 p-2"><i class="fas fa-bars fa-lg"></i></button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 p-6 space-y-6 shadow-2xl">
+            <button onclick="navigate('home')" class="block w-full text-left font-black uppercase text-sm border-b pb-2" data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</button>
+            <button onclick="navigate('fleet')" class="block w-full text-left font-black uppercase text-sm border-b pb-2" data-en="Fleet Finder" data-ar="البحث عن المعدات">Fleet Finder</button>
+            <button onclick="navigate('ecosystem')" class="block w-full text-left font-black uppercase text-sm border-b pb-2" data-en="Ecosystem" data-ar="الشركاء">Ecosystem</button>
+            <button onclick="navigate('terminal')" class="block w-full text-left font-black uppercase text-sm text-yellow-600 font-black" data-en="Contact Us" data-ar="اتصل بنا">Contact Us</button>
+        </div>
+    </nav>
+
+    <!-- Floating WhatsApp - Optimized Mobile Link -->
+    <div class="fixed bottom-8 right-8 z-50">
+        <a href="https://api.whatsapp.com/send?phone=96897278880" target="_blank" class="w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center shadow-2xl whatsapp-pulse text-2xl transition transform hover:scale-110 active:scale-95" title="WhatsApp Us">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <main class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        
+        <!-- View: Home / Dashboard -->
+        <section id="view-home" class="view-content space-y-12">
+            <div class="max-w-4xl mx-auto space-y-8 text-center">
+                <div class="inline-block bg-yellow-400 text-slate-900 text-[10px] font-900 uppercase px-4 py-1.5 rounded-full tracking-widest shadow-sm" data-en="JSRS Certified SME" data-ar="مؤسسة صغيرة ومتوسطة معتمدة من JSRS">
+                    JSRS Certified SME
+                </div>
+                <h1 class="text-5xl md:text-8xl font-900 text-slate-900 tracking-tighter leading-[0.9] uppercase" id="hero-title" 
+                    data-en="Quantifying <br><span class='text-slate-400'>Omani Infrastructure</span> <br>Capability" 
+                    data-ar="تطوير <br><span class='text-slate-400'>البنية التحتية</span> <br>العمانية">
+                    Quantifying <br><span class="text-slate-400">Omani Infrastructure</span> <br>Capability
+                </h1>
+                <p class="text-xl text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto" 
+                   data-en="A synthesis of high-performance machinery and JSRS-certified site solutions. Serving PDO, OXY, and major civil sectors across the Sultanate." 
+                   data-ar="مزيج من المعدات عالية الأداء وحلول المواقع المعتمدة. نخدم شركة تنمية نفط عمان وأوكسي والقطاعات المدنية الكبرى في جميع أنحاء السلطنة.">
+                    A synthesis of high-performance machinery and JSRS-certified site solutions. Serving PDO, OXY, and major civil sectors across the Sultanate.
+                </p>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 max-w-3xl mx-auto">
+                    <div class="bg-white p-5 rounded-3xl border border-slate-100 shadow-sm text-center">
+                        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1" data-en="Established" data-ar="تأسست">Established</p>
+                        <p class="text-xl font-black text-slate-900">2019</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-3xl border border-slate-100 shadow-sm text-center">
+                        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1" data-en="Status" data-ar="الحالة">Status</p>
+                        <p class="text-xl font-black text-yellow-600">Active</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-3xl border border-slate-100 shadow-sm text-center">
+                        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1" data-en="SME Class" data-ar="فئة ريادة">SME Class</p>
+                        <p class="text-xl font-black text-slate-900">Riyadha</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-3xl border border-slate-100 shadow-sm text-center">
+                        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1" data-en="Vision" data-ar="الرؤية">Vision</p>
+                        <p class="text-xl font-black text-slate-900">2040</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advantages Row -->
+            <div class="bg-slate-900 rounded-[4rem] p-12 text-white relative overflow-hidden">
+                <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+                    <div class="space-y-4">
+                        <h3 class="text-yellow-400 text-2xl font-900 uppercase tracking-tighter" data-en="PDO / OXY Approved" data-ar="معتمد من PDO / OXY">PDO / OXY Approved</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed" data-en="Compliance with the most rigorous energy sector safety standards in Oman." data-ar="الالتزام بأعلى معايير السلامة في قطاع الطاقة بسلطنة عمان.">Compliance with the most rigorous energy sector safety standards in Oman.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-yellow-400 text-2xl font-900 uppercase tracking-tighter" data-en="Tech-Driven Fleet" data-ar="أسطول مدعوم بالتقنية">Tech-Driven Fleet</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed" data-en="Equipped with late-model CAT and JCB machinery for site efficiency." data-ar="مجهزة بأحدث آليات CAT و JCB لضمان الكفاءة في الموقع.">Equipped with late-model CAT and JCB machinery for site efficiency.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-yellow-400 text-2xl font-900 uppercase tracking-tighter" data-en="Certified Crew" data-ar="طاقم معتمد">Certified Crew</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed" data-en="100% Omani managed with certified operators ensuring safety compliance." data-ar="إدارة عمانية 100٪ مع مشغلين معتمدين لضمان الالتزام بالسلامة.">100% Omani managed with certified operators ensuring safety compliance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- View: Fleet Finder -->
+        <section id="view-fleet" class="view-content hidden space-y-12">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8">
+                <div>
+                    <h2 class="text-5xl font-900 tracking-tighter uppercase" data-en="Machinery <span class='text-slate-400'>Intelligence</span>" data-ar="ذكاء <span class='text-slate-400'>الآليات</span>">Machinery <span class="text-slate-400">Intelligence</span></h2>
+                    <p class="text-slate-500 font-bold mt-2" data-en="Filter our core fleet by operational task to find the right solution." data-ar="قم بتصفية أسطولنا الأساسي حسب المهمة التشغيلية للعثور على الحل الصحيح.">Filter our core fleet by operational task to find the right solution.</p>
+                </div>
+                <div class="flex space-x-2 mt-6 md:mt-0" id="filter-container"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="fleet-grid"></div>
+        </section>
+
+        <!-- View: Ecosystem -->
+        <section id="view-ecosystem" class="view-content hidden space-y-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <h2 class="text-4xl font-900 tracking-tighter uppercase" data-en="Strategic <span class='text-slate-400'>Partnerships</span>" data-ar="شراكات <span class='text-slate-400'>استراتيجية</span>">Strategic <span class="text-slate-400">Partnerships</span></h2>
+                    <div class="bg-white p-8 rounded-[3rem] custom-shadow border border-slate-100">
+                        <canvas id="sectorRadarChart"></canvas>
+                    </div>
+                </div>
+                <div class="space-y-6" id="client-list"></div>
+            </div>
+        </section>
+
+        <!-- Section: Contact Terminal (The Mobile Lines Section) -->
+        <section id="view-terminal" class="view-content hidden bg-slate-100 py-20 px-4 rounded-[4rem] mt-12">
+            <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 items-center">
+                <div class="lg:w-1/3 text-center lg:text-left">
+                    <h2 class="text-5xl font-900 tracking-tighter uppercase mb-6" data-en="Contact <br><span class='text-yellow-600'>Terminal</span>" data-ar="محطة <br><span class='text-yellow-600'>الاتصال</span>">Contact <br><span class="text-yellow-600">Terminal</span></h2>
+                    <div class="space-y-4">
+                        <p class="font-bold text-lg">Ghala, Muscat - Sultanate of Oman</p>
+                        <p class="font-bold text-slate-500">Hirequip.amjaad@gmail.com</p>
+                    </div>
+                </div>
+                <!-- Contact Lines Cards -->
+                <div class="lg:w-2/3 grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+                    <div class="bg-white p-6 rounded-[2.5rem] border border-slate-200 custom-shadow flex flex-col justify-between cursor-pointer transition hover:border-yellow-400 transform active:scale-95" onclick="window.location.href='tel:+96892637770'">
+                        <div>
+                            <p class="text-[9px] font-black uppercase text-slate-400 mb-1" data-en="Administration" data-ar="الإدارة">Administration</p>
+                            <p class="text-lg font-black">Mr. Fahem</p>
+                        </div>
+                        <div class="text-yellow-600 mt-4 self-end"><i class="fas fa-phone-alt fa-lg"></i></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-[2.5rem] border border-slate-200 custom-shadow flex flex-col justify-between cursor-pointer transition hover:border-yellow-400 transform active:scale-95" onclick="window.location.href='tel:+96897278880'">
+                        <div>
+                            <p class="text-[9px] font-black uppercase text-slate-400 mb-1" data-en="Operations" data-ar="العمليات">Operations</p>
+                            <p class="text-lg font-black">Mr. T. Rajasekar</p>
+                        </div>
+                        <div class="text-yellow-600 mt-4 self-end"><i class="fas fa-phone-alt fa-lg"></i></div>
+                    </div>
+                    <!-- New Mobile Line -->
+                    <div class="bg-slate-900 p-6 rounded-[2.5rem] border border-slate-800 custom-shadow flex flex-col justify-between cursor-pointer transition hover:border-yellow-400 transform active:scale-95 text-white" onclick="window.location.href='https://api.whatsapp.com/send?phone=96897278880'">
+                        <div>
+                            <p class="text-[9px] font-black uppercase text-yellow-400 mb-1" data-en="New Support Line" data-ar="خط دعم جديد">New Support Line</p>
+                            <p class="text-lg font-black" data-en="Instant Chat" data-ar="محادثة فورية">Instant Chat</p>
+                        </div>
+                        <div class="text-green-500 mt-4 self-end"><i class="fab fa-whatsapp fa-lg"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-950 text-slate-600 py-12 px-4 text-center">
+        <p class="text-[10px] font-black uppercase tracking-[0.5em] mb-4 text-slate-400">Amjaad Maqshan LLC | Oman Vision 2040 Partner</p>
+        <p class="text-xs">© 2026 | JSRS Certified Contractor | Muscat, Oman</p>
+    </footer>
+
+    <script>
+        const fleetData = [
+            { name: "JCB 4CX / 3CX", cat: "Loader", specs: "High-versatility for trenching and loading.", icon: "fa-truck-pickup", ar_name: "JCB 4CX / 3CX", ar_cat: "لودر", ar_specs: "تنوع عالٍ لأعمال الخنادق والتحميل." },
+            { name: "CAT 422E", cat: "Loader", specs: "Robust backhoe solution for versatile site preparation.", icon: "fa-hard-hat", ar_name: "CAT 422E", ar_cat: "لودر", ar_specs: "حل حفار قوي لتجهيز المواقع المتنوعة." },
+            { name: "JCB 540-140", cat: "Loader", specs: "Specialized high-reach boom loader for logistics.", icon: "fa-arrow-up", ar_name: "JCB 540-140", ar_cat: "لودر", ar_specs: "لودر ذراع متخصص عالي الوصول." },
+            { name: "LiuGong 855H", cat: "Shovel", specs: "Heavy-duty material handling performance.", icon: "fa-truck-monster", ar_name: "LiuGong 855H", ar_cat: "شيول", ar_specs: "أداء قوي في مناولة المواد الثقيلة." },
+            { name: "Motor Grader", cat: "Grader", specs: "Precision road works and site leveling.", icon: "fa-road", ar_name: "ممهدة طرق", ar_cat: "كريدر", ar_specs: "أعمال طرق دقيقة وتسوية المواقع." },
+            { name: "Excavator", cat: "Excavator", specs: "Reliable power for complex earthworks.", icon: "fa-tractor", ar_name: "حفارة", ar_cat: "حفار", ar_specs: "قوة موثوقة لأعمال التربة المعقدة." }
+        ];
+
+        const clientData = [
+            { name: "Galfar Engineering", role: "Main Contractor", ar_role: "المقاول الرئيسي" },
+            { name: "Al Tasnim Enterprises", role: "Strategic Partner", ar_role: "شريك استراتيجي" },
+            { name: "Towell Infrastructure", role: "Civil Projects", ar_role: "مشاريع مدنية" }
+        ];
+
+        let currentLang = 'en';
+        let charts = {};
+        let currentFilter = 'all';
+
+        function navigate(viewId) {
+            document.querySelectorAll('.view-content').forEach(v => v.classList.add('hidden'));
+            const targetId = (viewId === 'home') ? 'view-home' : `view-${viewId}`;
+            const target = document.getElementById(targetId);
+            
+            if (target) {
+                target.classList.remove('hidden');
+                document.querySelectorAll('nav button').forEach(b => b.classList.remove('tab-active'));
+                const tab = document.getElementById(`tab-${viewId}`);
+                if (tab) tab.classList.add('tab-active');
+                document.getElementById('mobile-menu').classList.add('hidden');
+                
+                if(viewId === 'fleet') filterFleet(currentFilter);
+                if(viewId === 'ecosystem') renderClients();
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+
+        function filterFleet(cat) {
+            currentFilter = cat;
+            const grid = document.getElementById('fleet-grid');
+            const controls = document.getElementById('filter-container');
+            if(!grid || !controls) return;
+            
+            grid.innerHTML = '';
+            const data = cat === 'all' ? fleetData : fleetData.filter(f => f.cat === cat);
+            const filters = [{id:'all', en:'All', ar:'الكل'}, {id:'Loader', en:'Loaders', ar:'الرافعات'}, {id:'Shovel', en:'Shovels', ar:'الجرافات'}];
+            controls.innerHTML = filters.map(f => `<button onclick="filterFleet('${f.id}')" class="px-4 py-2 rounded-full border border-slate-200 text-[10px] font-black uppercase tracking-widest transition-colors ${cat === f.id ? 'bg-slate-900 text-white' : 'bg-white text-slate-500 hover:bg-slate-50'}">${currentLang === 'en' ? f.en : f.ar}</button>`).join('');
+
+            data.forEach(item => {
+                const name = currentLang === 'en' ? item.name : item.ar_name;
+                const catText = currentLang === 'en' ? item.cat : item.ar_cat;
+                const specs = currentLang === 'en' ? item.specs : item.ar_specs;
+                grid.innerHTML += `<div class="interactive-card p-8 rounded-[3rem] border border-slate-100 custom-shadow flex flex-col justify-between h-full"><div><div class="bg-slate-100 w-12 h-12 rounded-2xl flex items-center justify-center text-slate-900 mb-6"><i class="fas ${item.icon} fa-lg"></i></div><h4 class="text-2xl font-black uppercase mb-1 tracking-tighter leading-tight">${name}</h4><p class="text-xs font-bold text-yellow-600 mb-4 uppercase tracking-widest">${catText}</p><p class="text-sm text-slate-500 leading-relaxed font-medium">${specs}</p></div></div>`;
+            });
+        }
+
+        function renderClients() {
+            const list = document.getElementById('client-list');
+            if(!list) return;
+            list.innerHTML = '';
+            clientData.forEach(c => {
+                const role = currentLang === 'en' ? c.role : c.ar_role;
+                list.innerHTML += `<div class="bg-white p-6 rounded-3xl border border-slate-100 custom-shadow flex justify-between items-center group transition hover:border-yellow-400"><span class="font-black uppercase tracking-tighter text-lg leading-tight">${c.name}</span><span class="text-[10px] font-black uppercase bg-slate-100 px-3 py-1 rounded-full text-slate-400 group-hover:bg-yellow-400 group-hover:text-slate-900 transition whitespace-nowrap">${role}</span></div>`;
+            });
+            initEcosystemCharts();
+        }
+
+        function initEcosystemCharts() {
+            if(charts.sector) charts.sector.destroy();
+            const canvas = document.getElementById('sectorRadarChart');
+            if(!canvas) return;
+            charts.sector = new Chart(canvas.getContext('2d'), {
+                type: 'radar',
+                data: { labels: ['Energy', 'Infra', 'Aviation', 'SME Gov', 'Civil'], datasets: [{ data: [95, 85, 70, 90, 80], backgroundColor: 'rgba(255, 215, 0, 0.2)', borderColor: '#FFD700' }] },
+                options: { responsive: true, maintainAspectRatio: false, scales: { r: { ticks: { display: false } } } }
+            });
+        }
+
+        function toggleLang() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            const body = document.getElementById('main-body');
+            body.setAttribute('lang', currentLang);
+            body.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+            document.getElementById('lang-label').innerText = currentLang === 'en' ? 'ARABIC' : 'ENGLISH';
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const text = el.getAttribute(`data-${currentLang}`);
+                if (text) el.innerHTML = text;
+            });
+            const activeView = document.querySelector('.view-content:not(.hidden)').id.replace('view-', '');
+            if (activeView === 'fleet') filterFleet(currentFilter);
+            if (activeView === 'ecosystem') renderClients();
+        }
+
+        window.onload = () => { navigate('home'); };
+    </script>
+</body>
+</html>
