@@ -10,6 +10,10 @@
     <meta property="og:description" content="Specialized Machinery Solutions for PDO, OXY, and Infrastructure Sectors. JSRS Certified Omani LLC.">
     <meta property="og:type" content="website">
 
+    <!-- Preconnect to speed up font/icon loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -21,6 +25,8 @@
             background-color: #FAF9F6; 
             color: #0F172A;
             transition: all 0.3s ease; 
+            margin: 0;
+            padding: 0;
         }
 
         h1, h2, h3, .nav-brand { font-family: 'Outfit', sans-serif; }
@@ -28,27 +34,23 @@
         .tab-active { border-bottom: 4px solid #D4AF37; color: #0F172A; font-weight: 800; }
         
         .premium-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
-            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            background: #ffffff;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         .premium-card:hover {
-            transform: translateY(-10px);
-            background: #ffffff;
+            transform: translateY(-8px);
             box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.08);
             border-color: #D4AF37;
         }
 
-        /* Hero Background - Nizwa / Oman Infrastructure Aesthetic */
+        /* Optimized Hero Background - Using pure CSS for instant loading */
         .hero-bg {
-            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.85)), 
-                        url('nizwa-project.jpg'); 
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            position: relative;
+            background: linear-gradient(135deg, #0F172A 0%, #1e293b 50%, #0F172A 100%);
+            overflow: hidden;
         }
 
         [lang="ar"] { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; }
@@ -56,12 +58,12 @@
         .evolution-pill {
             background: rgba(212, 175, 55, 0.2);
             color: #D4AF37;
-            padding: 6px 16px;
+            padding: 8px 24px;
             border-radius: 99px;
-            font-size: 11px;
+            font-size: 13px;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
         }
 
         .whatsapp-btn {
@@ -77,12 +79,13 @@
             width: 70px;
             height: 70px;
             background: white;
-            padding: 6px;
-            border-radius: 14px;
+            padding: 8px;
+            border-radius: 16px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
         
         .logo-container img {
@@ -92,15 +95,20 @@
         }
 
         .client-card {
-            filter: grayscale(100%);
-            opacity: 0.6;
-            transition: all 0.4s ease;
+            border: 1px solid #E2E8F0;
+            background: white;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 100px;
+            padding: 1.5rem;
         }
         .client-card:hover {
-            filter: grayscale(0%);
-            opacity: 1;
-            transform: translateY(-5px);
             border-color: #D4AF37;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            transform: scale(1.05);
         }
 
         .form-input {
@@ -118,19 +126,25 @@
             box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
         }
 
-        .view-content { animation: fadeIn 0.6s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        .view-content { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 3.5rem !important; }
+        }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden" id="main-body" lang="en" dir="ltr">
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-2xl border-b border-slate-100">
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-2xl border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex justify-between h-24 items-center">
+                <!-- Branding -->
                 <div class="flex items-center space-x-5 cursor-pointer" onclick="navigate('home')">
                     <div class="logo-container">
-                        <img src="logo.png" alt="AMJAAD Logo" onerror="this.src='https://via.placeholder.com/70x70?text=AM'">
+                        <img src="logo.png" alt="AMJAAD Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                        <span class="hidden font-900 text-slate-900 text-xl">AM</span>
                     </div>
                     <div class="nav-brand">
                         <span class="text-2xl font-900 uppercase block tracking-tighter leading-none">AMJAAD MAQSHAN</span>
@@ -140,107 +154,115 @@
                 
                 <!-- Desktop Navigation -->
                 <div class="hidden lg:flex items-center space-x-10 font-bold text-[11px] uppercase tracking-widest">
-                    <button onclick="navigate('home')" id="tab-home" class="hover:text-[#D4AF37] transition">Solutions</button>
-                    <button onclick="navigate('fleet')" id="tab-fleet" class="hover:text-[#D4AF37] transition">Fleet Specs</button>
+                    <button onclick="navigate('home')" id="tab-home" class="hover:text-[#D4AF37] transition">Intelligence</button>
+                    <button onclick="navigate('fleet')" id="tab-fleet" class="hover:text-[#D4AF37] transition">Asset Registry</button>
                     <button onclick="navigate('icv')" id="tab-icv" class="hover:text-[#D4AF37] transition">ICV Strategy</button>
                     <button onclick="navigate('terminal')" id="tab-terminal" class="bg-slate-900 text-[#D4AF37] px-6 py-3 rounded-xl shadow-xl hover:bg-slate-800 transition">Request Quote</button>
-                    <button onclick="toggleLang()" class="text-slate-400 hover:text-slate-900 px-4 transition">
-                        <span id="lang-label">ARABIC</span>
+                    <button onclick="toggleLang()" class="text-slate-400 hover:text-slate-900 px-4 transition uppercase">
+                        <span id="lang-label">Arabic</span>
                     </button>
                 </div>
 
+                <!-- Mobile Navigation Toggle -->
                 <div class="lg:hidden flex items-center space-x-4">
                     <button onclick="toggleLang()" class="text-[10px] font-black px-3 py-1.5 bg-slate-100 rounded-lg">AR/EN</button>
-                    <button onclick="toggleMobileMenu()" class="text-slate-900"><i class="fas fa-bars-staggered fa-lg"></i></button>
+                    <button onclick="toggleMobileMenu()" class="text-slate-900 p-2"><i class="fas fa-bars-staggered fa-lg"></i></button>
                 </div>
             </div>
         </div>
+        
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t p-8 space-y-6 shadow-2xl">
+            <button onclick="navigate('home')" class="block w-full text-left font-black uppercase text-sm border-b pb-4">Intelligence</button>
+            <button onclick="navigate('fleet')" class="block w-full text-left font-black uppercase text-sm border-b pb-4">Asset Registry</button>
+            <button onclick="navigate('icv')" class="block w-full text-left font-black uppercase text-sm border-b pb-4">ICV Strategy</button>
+            <button onclick="navigate('terminal')" class="block w-full text-left font-black uppercase text-sm text-[#D4AF37]">Request Quote</button>
+        </div>
     </nav>
 
-    <!-- Floating Connect -->
+    <!-- Floating WhatsApp Action -->
     <div class="fixed bottom-10 right-10 z-50 whatsapp-btn">
-        <a href="https://wa.me/96897278880" target="_blank" class="w-16 h-16 bg-green-500 text-white rounded-2xl flex items-center justify-center shadow-2xl text-3xl">
+        <a href="https://wa.me/96897278880" target="_blank" class="w-16 h-16 bg-green-500 text-white rounded-2xl flex items-center justify-center shadow-[0_20px_50px_rgba(34,197,94,0.4)] text-3xl transition hover:scale-110">
             <i class="fab fa-whatsapp"></i>
         </a>
     </div>
 
-    <!-- Main Container -->
+    <!-- Main Content -->
     <main class="w-full">
         
-        <!-- View: Dashboard -->
+        <!-- View: Home / Dashboard -->
         <section id="view-home" class="view-content">
-            <!-- Hero Area -->
+            <!-- Hero Section -->
             <div class="hero-bg min-h-[90vh] flex items-center justify-center px-6 pt-24 text-center">
-                <div class="max-w-5xl space-y-10 py-20">
-                    <div class="inline-flex items-center space-x-2 evolution-pill mx-auto">
-                        <i class="fas fa-shield-check"></i>
-                        <span data-en="Tier-1 Riyadha SME Certified" data-ar="مؤسسة فئة (أ) ريادة معتمدة">Tier-1 Riyadha SME Certified</span>
+                <div class="max-w-6xl space-y-12 py-20 relative z-10">
+                    <div class="inline-flex items-center space-x-3 evolution-pill mx-auto">
+                        <i class="fas fa-shield-halved"></i>
+                        <span data-en="Tier-1 Omani Riyadha SME" data-ar="مؤسسة عمانية فئة ريادة (أ)">Tier-1 Omani Riyadha SME</span>
                     </div>
                     
-                    <!-- Centered Header in Capital Letters -->
-                    <h1 class="text-6xl md:text-9xl font-900 text-white tracking-tighter leading-[0.85] uppercase">
+                    <!-- Centered Branding Capitalized -->
+                    <h1 class="text-7xl md:text-[10rem] font-900 text-white tracking-tighter leading-[0.8] uppercase">
                         AMJAAD MAQSHAN<br>
-                        <span class='text-[#D4AF37] opacity-90' data-en="EQUIPMENT LOGISTICS" data-ar="لوجستيات المعدات">EQUIPMENT LOGISTICS</span>
+                        <span class='text-[#D4AF37] opacity-90' data-en="INDUSTRIAL POWER" data-ar="القوة الصناعية">INDUSTRIAL POWER</span>
                     </h1>
                     
-                    <p class="text-xl md:text-2xl text-slate-300 font-medium leading-relaxed max-w-3xl mx-auto" 
-                       data-en="Omani machinery powerhouse providing specialized rental solutions for PDO, OXY, and Industrial giants across the Sultanate." 
-                       data-ar="قوة عمانية في مجال الآليات توفر حلول تأجير متخصصة لشركة تنمية نفط عمان وأوكسي والعمالقة الصناعيين في جميع أنحاء السلطنة.">
-                        Omani machinery powerhouse providing specialized rental solutions for PDO, OXY, and Industrial giants across the Sultanate.
+                    <p class="text-xl md:text-3xl text-slate-300 font-medium leading-relaxed max-w-4xl mx-auto" 
+                       data-en="Strategic industrial machinery solutions for PDO, OXY, and Oman's national development. 100% Omani managed excellence." 
+                       data-ar="حلول الآليات الصناعية الاستراتيجية لشركة تنمية نفط عمان وأوكسي والتنمية الوطنية في عمان. تميز عماني بنسبة 100٪.">
+                        Strategic industrial machinery solutions for PDO, OXY, and Oman's national development. 100% Omani managed excellence.
                     </p>
                     
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-12 max-w-4xl mx-auto">
-                        <div class="bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/20 text-white">
-                            <p class="text-[9px] font-black uppercase tracking-widest mb-1 opacity-60" data-en="REGISTRATION" data-ar="التسجيل">REGISTRATION</p>
-                            <p class="text-xl font-black">CR 1322963</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 max-w-5xl mx-auto text-white">
+                        <div class="bg-white/10 backdrop-blur-md p-8 rounded-[2rem] border border-white/20">
+                            <p class="text-[10px] font-black uppercase tracking-widest mb-2 opacity-60" data-en="ESTABLISHED" data-ar="تأسست">ESTABLISHED</p>
+                            <p class="text-2xl font-black">2019</p>
                         </div>
-                        <div class="bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/20 text-white border-b-4 border-b-[#D4AF37]">
-                            <p class="text-[9px] font-black uppercase tracking-widest mb-1 opacity-60" data-en="OWNERSHIP" data-ar="الملكية">OWNERSHIP</p>
-                            <p class="text-xl font-black tracking-tight">100% OMANI</p>
+                        <div class="bg-white/10 backdrop-blur-md p-8 rounded-[2rem] border border-white/20 border-b-4 border-b-[#D4AF37]">
+                            <p class="text-[10px] font-black uppercase tracking-widest mb-2 opacity-60" data-en="CR NUMBER" data-ar="رقم السجل">CR NUMBER</p>
+                            <p class="text-2xl font-black tracking-tight">1322963</p>
                         </div>
-                        <div class="bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/20 text-white">
-                            <p class="text-[9px] font-black uppercase tracking-widest mb-1 opacity-60" data-en="PDO SPEC" data-ar="معايير PDO">PDO SPEC</p>
-                            <p class="text-xl font-black">COMPLIANT</p>
+                        <div class="bg-white/10 backdrop-blur-md p-8 rounded-[2rem] border border-white/20">
+                            <p class="text-[10px] font-black uppercase tracking-widest mb-2 opacity-60" data-en="OWNERSHIP" data-ar="الملكية">OWNERSHIP</p>
+                            <p class="text-2xl font-black uppercase">100% Omani</p>
                         </div>
-                        <div class="bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/20 text-white">
-                            <p class="text-[9px] font-black uppercase tracking-widest mb-1 opacity-60" data-en="JSRS STATUS" data-ar="حالة JSRS">JSRS STATUS</p>
-                            <p class="text-xl font-black uppercase">ACTIVE</p>
+                        <div class="bg-white/10 backdrop-blur-md p-8 rounded-[2rem] border border-white/20">
+                            <p class="text-[10px] font-black uppercase tracking-widest mb-2 opacity-60" data-en="OPERATIONS" data-ar="العمليات">OPERATIONS</p>
+                            <p class="text-2xl font-black uppercase">Active</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Optimized Client Portfolio (Specific List) -->
-            <div class="max-w-7xl mx-auto px-6 py-24 space-y-16">
+            <!-- Client Portfolio Section -->
+            <div class="max-w-7xl mx-auto px-6 py-24 space-y-20">
                 <div class="text-center space-y-4">
-                    <h2 class="text-4xl font-900 uppercase tracking-tighter" data-en="STRATEGIC PARTNERSHIPS" data-ar="الشراكات الاستراتيجية">STRATEGIC PARTNERSHIPS</h2>
-                    <p class="text-slate-400 font-medium" data-en="Trusted technical support provider for the Sultanate's major contractors." data-ar="مزود دعم فني موثوق لكبار المقاولين في السلطنة.">Trusted technical support provider for the Sultanate's major contractors.</p>
+                    <h2 class="text-5xl font-900 uppercase tracking-tighter" data-en="STRATEGIC PARTNERSHIPS" data-ar="الشراكات الاستراتيجية">STRATEGIC PARTNERSHIPS</h2>
+                    <p class="text-slate-400 text-lg font-medium" data-en="Technical equipment support for the Sultanate's industry giants." data-ar="دعم المعدات الفنية لعمالقة الصناعة في السلطنة.">Technical equipment support for the Sultanate's industry giants.</p>
                 </div>
                 
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <!-- Targeted Client Cards -->
-                    <div class="premium-card p-10 rounded-[2.5rem] text-center client-card">
-                        <h4 class="font-900 uppercase text-xs tracking-widest">Galfar Engineering</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="client-card rounded-[2.5rem]">
+                        <h4 class="font-900 uppercase text-xs tracking-widest">Galfar Engineering & Contracting</h4>
                     </div>
-                    <div class="premium-card p-10 rounded-[2.5rem] text-center client-card">
+                    <div class="client-card rounded-[2.5rem]">
                         <h4 class="font-900 uppercase text-xs tracking-widest">Al Tasnim Enterprises</h4>
                     </div>
-                    <div class="premium-card p-10 rounded-[2.5rem] text-center client-card border-b-4 border-b-[#D4AF37]">
+                    <div class="client-card rounded-[2.5rem] border-b-4 border-b-[#D4AF37]">
                         <h4 class="font-900 uppercase text-xs tracking-widest">Towell Infrastructure</h4>
                     </div>
-                    <div class="premium-card p-10 rounded-[2.5rem] text-center client-card">
+                    <div class="client-card rounded-[2.5rem]">
                         <h4 class="font-900 uppercase text-xs tracking-widest">Al Turki Enterprises</h4>
                     </div>
-                    <div class="premium-card p-10 rounded-[2.5rem] text-center client-card">
+                    <div class="client-card rounded-[2.5rem]">
                         <h4 class="font-900 uppercase text-xs tracking-widest">Oman Airports</h4>
                     </div>
-                    <div class="premium-card p-10 rounded-[2.5rem] text-center client-card">
+                    <div class="client-card rounded-[2.5rem]">
                         <h4 class="font-900 uppercase text-xs tracking-widest">Larsen & Toubro</h4>
                     </div>
-                    <div class="premium-card p-10 rounded-[2.5rem] text-center client-card border-b-4 border-b-[#D4AF37]">
+                    <div class="client-card rounded-[2.5rem] border-b-4 border-b-[#D4AF37]">
                         <h4 class="font-900 uppercase text-xs tracking-widest">OHI Telecommunications</h4>
                     </div>
-                    <div class="premium-card p-10 rounded-[2.5rem] text-center client-card bg-slate-900 text-white border-none">
+                    <div class="client-card rounded-[2.5rem] bg-slate-900 text-white border-none">
                         <h4 class="font-900 uppercase text-xs tracking-widest text-[#D4AF37]">PDO / OXY Sites</h4>
                     </div>
                 </div>
@@ -248,87 +270,91 @@
         </section>
 
         <!-- View: ICV Strategy -->
-        <section id="view-icv" class="view-content hidden max-w-7xl mx-auto px-6 py-20 space-y-20">
-            <div class="text-center space-y-4">
-                <h2 class="text-5xl font-900 uppercase tracking-tighter" data-en="IN-COUNTRY <span class='text-[#D4AF37]'>VALUE</span>" data-ar="القيمة المحلية <span class='text-[#D4AF37]'>المضافة</span>">IN-COUNTRY <span class="text-[#D4AF37]">VALUE</span></h2>
-                <p class="text-slate-500 font-medium" data-en="Strategic ICV excellence contributing to Oman Vision 2040." data-ar="التميز الاستراتيجي في القيمة المحلية المضافة للمساهمة في رؤية عمان 2040.">Strategic ICV excellence contributing to Oman Vision 2040.</p>
+        <section id="view-icv" class="view-content hidden max-w-7xl mx-auto px-6 py-24 space-y-24">
+            <div class="text-center space-y-6">
+                <h2 class="text-6xl font-900 uppercase tracking-tighter" data-en="IN-COUNTRY <span class='text-[#D4AF37]'>VALUE</span>" data-ar="القيمة المحلية <span class='text-[#D4AF37]'>المضافة</span>">IN-COUNTRY <span class="text-[#D4AF37]">VALUE</span></h2>
+                <p class="text-slate-500 text-xl font-medium max-w-3xl mx-auto" data-en="Maximizing local industrial contribution and supporting Oman Vision 2040." data-ar="تعظيم المساهمة الصناعية المحلية ودعم رؤية عمان 2040.">Maximizing local industrial contribution and supporting Oman Vision 2040.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="bg-slate-900 p-16 rounded-[4rem] text-white space-y-8 shadow-2xl relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-8 opacity-10"><i class="fas fa-crown text-8xl"></i></div>
-                    <h3 class="text-4xl font-900 uppercase tracking-tight" data-en="100% Omani Ownership" data-ar="ملكية عمانية 100٪">100% Omani Ownership</h3>
-                    <p class="text-slate-400 leading-relaxed text-lg" data-en="Amjaad Maqshan is a fully Omani-owned and managed LLC. Partnering with us provides major contractors with maximum ICV points and aligns with national Omanization targets." data-ar="أمجاد مقشن هي شركة عمانية بالكامل ملكية وإدارة. الشراكة معنا تزود كبار المقاولين بأقصى نقاط القيمة المحلية المضافة وتتماشى مع أهداف التعمين الوطنية.">Amjaad Maqshan is a fully Omani-owned and managed LLC. Partnering with us provides major contractors with maximum ICV points and aligns with national Omanization targets.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="bg-slate-900 p-16 rounded-[4rem] text-white space-y-10 shadow-2xl relative overflow-hidden">
+                    <h3 class="text-4xl font-900 uppercase tracking-tight" data-en="100% Omani Enterprise" data-ar="مؤسسة عمانية 100٪">100% Omani Enterprise</h3>
+                    <p class="text-slate-400 text-lg leading-relaxed" data-en="Amjaad Maqshan is fully Omani-managed, ensuring that every project supports national development goals. We provide major contractors with high ICV points through Omani technical leadership and local resource utilization." data-ar="أمجاد مقشن تدار بالكامل بكوادر عمانية، مما يضمن أن كل مشروع يدعم أهداف التنمية الوطنية. نحن نزود كبار المقاولين بنقاط ICV عالية من خلال القيادة الفنية العمانية.">Amjaad Maqshan is fully Omani-managed, ensuring that every project supports national development goals. We provide major contractors with high ICV points through Omani technical leadership and local resource utilization.</p>
+                    <div class="flex items-center space-x-4 border-t border-slate-700 pt-8">
+                        <i class="fas fa-medal text-[#D4AF37] text-3xl"></i>
+                        <span class="font-bold text-xs uppercase tracking-widest">Riyadha Tier-1 Certified</span>
+                    </div>
                 </div>
-                <div class="space-y-8">
+                <div class="space-y-10">
                     <div class="premium-card p-10 rounded-[3rem] border-l-8 border-l-[#D4AF37]">
-                        <h4 class="text-xl font-900 uppercase mb-2" data-en="Local Supply Chain" data-ar="سلسلة التوريد المحلية">Local Supply Chain</h4>
-                        <p class="text-slate-500 text-sm" data-en="We prioritize Omani vendors for all machinery maintenance and technical consumables, ensuring project capital remains in the local economy." data-ar="نحن نعطي الأولوية للموردين العمانيين لجميع أعمال صيانة الآليات والمواد الفنية، مما يضمن بقاء رأس مال المشروع في الاقتصاد المحلي.">We prioritize Omani vendors for all machinery maintenance and technical consumables, ensuring project capital remains in the local economy.</p>
+                        <h4 class="text-2xl font-900 uppercase mb-3" data-en="Local Supply Chain" data-ar="سلسلة التوريد المحلية">Local Supply Chain</h4>
+                        <p class="text-slate-500" data-en="We prioritize domestic vendors for machinery maintenance and consumables, keeping the technical ecosystem within Oman thriving." data-ar="نحن نعطي الأولوية للموردين المحليين لصيانة الآليات والمواد الاستهلاكية.">We prioritize domestic vendors for machinery maintenance and consumables, keeping the technical ecosystem within Oman thriving.</p>
                     </div>
                     <div class="premium-card p-10 rounded-[3rem]">
-                        <h4 class="text-xl font-900 uppercase mb-2" data-en="Tier-1 SME Support" data-ar="دعم المؤسسات الصغيرة والمتوسطة">Tier-1 SME Support</h4>
-                        <p class="text-slate-500 text-sm" data-en="As a JSRS-certified Riyadha SME, we act as a strategic catalyst for industrial growth in remote areas like Nimr, Duqm, and Nizwa." data-ar="كمؤسسة صغيرة ومتوسطة معتمدة من JSRS وريادة، نعمل كمحفز استراتيجي للنمو الصناعي في المناطق النائية.">As a JSRS-certified Riyadha SME, we act as a strategic catalyst for industrial growth in remote areas like Nimr, Duqm, and Nizwa.</p>
+                        <h4 class="text-2xl font-900 uppercase mb-3" data-en="Knowledge Transfer" data-ar="نقل المعرفة">Knowledge Transfer</h4>
+                        <p class="text-slate-500" data-en="Investing in the technical training of Omani heavy-equipment specialists to lead the future of Omani infrastructure." data-ar="الاستثمار في التدريب الفني للمتخصصين العمانيين في المعدات الثقيلة.">Investing in the technical training of Omani heavy-equipment specialists to lead the future of Omani infrastructure.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- View: Fleet Specs -->
-        <section id="view-fleet" class="view-content hidden max-w-7xl mx-auto px-6 py-20 space-y-16">
+        <!-- View: Asset Registry -->
+        <section id="view-fleet" class="view-content hidden max-w-7xl mx-auto px-6 py-24 space-y-20">
             <div class="text-center space-y-6">
-                <h2 class="text-5xl font-900 uppercase tracking-tighter" data-en="TECHNICAL <span class='text-slate-400'>ASSET REGISTRY</span>" data-ar="سجل <span class='text-slate-400'>الأصول الفنية</span>">TECHNICAL <span class="text-slate-400">ASSET REGISTRY</span></h2>
+                <h2 class="text-6xl font-900 uppercase tracking-tighter" data-en="ASSET <span class='text-slate-400'>REGISTRY</span>" data-ar="سجل <span class='text-slate-400'>الأصول</span>">ASSET <span class="text-slate-400">REGISTRY</span></h2>
                 <div class="flex justify-center flex-wrap gap-4 mt-8" id="filter-container"></div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="fleet-grid"></div>
         </section>
 
         <!-- View: Terminal -->
-        <section id="view-terminal" class="view-content hidden max-w-7xl mx-auto px-6 py-20 space-y-20">
+        <section id="view-terminal" class="view-content hidden max-w-7xl mx-auto px-6 py-24 space-y-24">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
-                <div class="space-y-12">
-                    <div class="flex items-center space-x-5">
-                        <div class="logo-container" style="width: 100px; height: 100px;">
-                            <img src="logo.png" alt="Official Logo" onerror="this.src='https://via.placeholder.com/100x100?text=AM'">
+                <div class="space-y-16">
+                    <div class="flex items-center space-x-6">
+                        <div class="logo-container">
+                            <img src="logo.png" alt="AMJAAD Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                            <span class="hidden font-900 text-slate-900 text-xl">AM</span>
                         </div>
                         <div>
                             <h2 class="text-5xl font-900 uppercase tracking-tighter leading-none">AMJAAD MAQSHAN</h2>
-                            <p class="text-[#D4AF37] font-black text-xs uppercase tracking-[0.4em] mt-2">SOLUTIONS TERMINAL</p>
+                            <p class="text-[#D4AF37] font-black text-sm uppercase tracking-[0.4em] mt-3">Solutions Terminal</p>
                         </div>
                     </div>
                     
-                    <h2 class="text-6xl md:text-7xl font-900 uppercase tracking-tighter leading-[0.9]" data-en="Request <br><span class='text-[#D4AF37]'>Technical Quote</span>" data-ar="طلب <br><span class='text-[#D4AF37]'>عرض سعر فني</span>">Request <br><span class="text-[#D4AF37]">Technical Quote</span></h2>
+                    <h2 class="text-7xl md:text-8xl font-900 uppercase tracking-tighter leading-[0.85]" data-en="Request <br><span class='text-[#D4AF37]'>Technical Quote</span>" data-ar="طلب <br><span class='text-[#D4AF37]'>عرض سعر فني</span>">Request <br><span class="text-[#D4AF37]">Technical Quote</span></h2>
                     
-                    <div class="space-y-6">
-                        <div class="premium-card p-10 rounded-[3rem] flex justify-between items-center cursor-pointer transition hover:border-[#D4AF37]" onclick="window.location.href='tel:+96892637770'">
+                    <div class="space-y-8">
+                        <div class="premium-card p-12 rounded-[3.5rem] flex justify-between items-center cursor-pointer transition hover:border-[#D4AF37]" onclick="window.location.href='tel:+96892637770'">
                             <div>
-                                <p class="text-[10px] font-black text-slate-400 uppercase mb-1" data-en="Corporate Administration" data-ar="الإدارة العامة للشركة">Corporate Administration</p>
-                                <p class="text-2xl font-black">Mr. Fahem</p>
+                                <p class="text-[11px] font-black text-slate-400 uppercase mb-2" data-en="Corporate Management" data-ar="الإدارة العامة للمؤسسة">Corporate Management</p>
+                                <p class="text-3xl font-black">Mr. Fahem</p>
                             </div>
-                            <div class="text-[#D4AF37]"><i class="fas fa-phone-flip fa-2xl"></i></div>
+                            <div class="text-[#D4AF37]"><i class="fas fa-phone-flip fa-3xl"></i></div>
                         </div>
-                        <!-- Updated Project Manager Details -->
-                        <div class="premium-card p-10 rounded-[3rem] flex justify-between items-center cursor-pointer border-t-8 border-t-[#D4AF37]" onclick="window.location.href='tel:+96897278880'">
+                        <div class="premium-card p-12 rounded-[3.5rem] flex justify-between items-center cursor-pointer border-t-[12px] border-t-[#D4AF37]" onclick="window.location.href='tel:+96897278880'">
                             <div>
-                                <p class="text-[10px] font-black text-slate-400 uppercase mb-1" data-en="Project Manager" data-ar="مدير المشروع">Project Manager</p>
-                                <p class="text-2xl font-black">Mr. T. Rajasekar</p>
+                                <p class="text-[11px] font-black text-slate-400 uppercase mb-2" data-en="Project Manager" data-ar="مدير المشروع">Project Manager</p>
+                                <p class="text-3xl font-black">Mr. T. Rajasekar</p>
                             </div>
-                            <div class="text-[#D4AF37]"><i class="fas fa-phone-volume fa-2xl"></i></div>
+                            <div class="text-[#D4AF37]"><i class="fas fa-phone-volume fa-3xl"></i></div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Inquiry Form -->
-                <div class="bg-white rounded-[4rem] p-12 shadow-2xl border border-slate-100">
-                    <h3 class="text-3xl font-900 uppercase mb-10 tracking-tight text-center" data-en="Project Inquiry" data-ar="استفسار عن مشروع">Project Inquiry</h3>
-                    <form name="quote-form" method="POST" data-netlify="true" class="space-y-6">
+                <div class="bg-white rounded-[4rem] p-12 shadow-2xl border border-slate-100 relative overflow-hidden">
+                    <h3 class="text-4xl font-900 uppercase mb-12 tracking-tight text-center" data-en="Project Inquiry" data-ar="استفسار عن مشروع">Project Inquiry</h3>
+                    <form name="quote-form" method="POST" data-netlify="true" class="space-y-8">
                         <input type="hidden" name="form-name" value="quote-form" />
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <input type="text" name="name" class="form-input" required placeholder="Authorized Name">
-                            <input type="tel" name="phone" class="form-input" required placeholder="Direct Phone">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <input type="text" name="name" class="form-input" required placeholder="Full Name">
+                            <input type="tel" name="phone" class="form-input" required placeholder="Phone (+968)">
                         </div>
-                        <input type="text" name="company" class="form-input" required placeholder="Company Name">
-                        <button type="submit" class="w-full bg-slate-900 text-[#D4AF37] py-7 rounded-3xl font-900 uppercase tracking-[0.3em] shadow-2xl hover:scale-105 transition-all">
-                            DEPLOY INQUIRY
+                        <input type="text" name="company" class="form-input" required placeholder="Organization / Entity">
+                        <textarea name="scope" class="form-input h-40" placeholder="Describe machinery requirements and site location..."></textarea>
+                        <button type="submit" class="w-full bg-slate-900 text-[#D4AF37] py-8 rounded-[2rem] font-900 uppercase tracking-[0.4em] shadow-2xl hover:scale-105 transition-all">
+                            Submit Quote Request
                         </button>
                     </form>
                 </div>
@@ -336,58 +362,78 @@
         </section>
     </main>
 
+    <!-- Footer -->
     <footer class="bg-slate-950 text-slate-600 py-24 px-6 text-center">
-        <div class="max-w-5xl mx-auto space-y-8 text-white">
-            <div class="flex justify-center mb-10">
-                <div class="logo-container" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
-                    <img src="logo.png" alt="Logo White" style="filter: brightness(0) invert(1);" onerror="this.src='https://via.placeholder.com/100x100?text=AM'">
-                </div>
-            </div>
-            <p class="text-sm font-black uppercase tracking-[1em]">AMJAAD MAQSHAN LLC | Muscat, Oman</p>
-            <div class="flex flex-wrap justify-center gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                <span>JSRS CERTIFIED</span>
+        <div class="max-w-6xl mx-auto space-y-10 text-white">
+            <p class="text-lg font-black uppercase tracking-[0.8em]">AMJAAD MAQSHAN LLC | Muscat, Oman</p>
+            <div class="flex flex-wrap justify-center gap-12 text-[11px] font-black uppercase tracking-[0.3em] text-slate-400">
+                <span>JSRS CERTIFIED #122963</span>
                 <span class="text-[#D4AF37]">OMANI ENTITY</span>
-                <span>PDO COMPLIANT</span>
+                <span>PDO & OXY COMPLIANT</span>
             </div>
         </div>
     </footer>
 
     <script>
         const fleetData = [
-            { name: "JCB 4CX / 3CX", cat: "Loader", specs: "High-Versatility Backhoe. Specialized for remote trenching.", icon: "fa-truck-pickup", ar_name: "JCB 4CX / 3CX", ar_specs: "حفار لودر متعدد الاستخدامات. متخصص للعمل في المناطق النائية." },
-            { name: "CAT 422E Series", cat: "Loader", specs: "Technical Loader. Precision urban site preparation.", icon: "fa-hard-hat", ar_name: "CAT 422E Series", ar_specs: "لودر فني. تجهيز دقيق للمواقع الحضرية." },
-            { name: "Motor Grader", cat: "Grader", specs: "Infrastructure Road Specialist. High precision grading.", icon: "fa-road", ar_name: "ممهدة طرق", ar_specs: "متخصص في الطرق والبنية التحتية." },
-            { name: "LiuGong 855H", cat: "Shovel", specs: "Heavy Material Handling. Industrial capacity wheel loader.", icon: "fa-truck-monster", ar_name: "LiuGong 855H", ar_specs: "مناولة المواد الثقيلة. لودر بعجلات بسعة صناعية." },
-            { name: "Hydraulic Excavator", cat: "Excavator", specs: "Primary Earthworks. Deep excavation and breaking power.", icon: "fa-tractor", ar_name: "حفارة هيدروليكية", ar_specs: "قوة حفر وتكسير عميقة." }
+            { name: "JCB 4CX / 3CX", cat: "Loader", specs: "High-Versatility Backhoe. Optimized for interior site preparation.", icon: "fa-truck-pickup", ar_name: "JCB 4CX / 3CX", ar_specs: "حفار لودر متعدد الاستخدامات. محسن لتجهيز المواقع الداخلية." },
+            { name: "CAT 422E Series", cat: "Loader", specs: "Technical Loader. High reliability for site logistics and handling.", icon: "fa-hard-hat", ar_name: "CAT 422E Series", ar_specs: "لودر فني دقيق. موثوقية عالية للوجستيات الموقع." },
+            { name: "Motor Grader", cat: "Grader", specs: "Road Infrastructure Specialist. Precise site grading and leveling.", icon: "fa-road", ar_name: "ممهدة طرق", ar_specs: "متخصص في البنية التحتية للطرق. تسوية وتدرج دقيق للموقع." },
+            { name: "LiuGong 855H", cat: "Shovel", specs: "Industrial Material Handling. Heavy-duty wheel loader for quarry work.", icon: "fa-truck-monster", ar_name: "LiuGong 855H", ar_specs: "لودر بعجلات صناعي للمحاجر ومناولة المواد." },
+            { name: "Hydraulic Excavator", cat: "Excavator", specs: "Heavy Earthworks Power. Specialized for deep excavation and breaking.", icon: "fa-tractor", ar_name: "حفارة هيدروليكية", ar_specs: "قوة أعمال تربة ثقيلة. متخصص للحفر والكسر." }
         ];
 
         let currentLang = 'en';
         let currentFilter = 'all';
 
         function navigate(viewId) {
-            document.querySelectorAll('.view-content').forEach(v => v.classList.add('hidden'));
+            const views = ['home', 'fleet', 'icv', 'terminal'];
+            views.forEach(v => {
+                const el = document.getElementById(`view-${v}`);
+                if (el) el.classList.add('hidden');
+            });
             const target = document.getElementById(`view-${viewId}`);
             if (target) target.classList.remove('hidden');
+            
             document.querySelectorAll('nav button').forEach(b => b.classList.remove('tab-active'));
             const tab = document.getElementById(`tab-${viewId}`);
             if (tab) tab.classList.add('tab-active');
+            
+            document.getElementById('mobile-menu').classList.add('hidden');
             if(viewId === 'fleet') renderFleet(currentFilter);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
 
         function renderFleet(cat) {
             currentFilter = cat;
             const grid = document.getElementById('fleet-grid');
             const controls = document.getElementById('filter-container');
+            if(!grid || !controls) return;
             grid.innerHTML = '';
             const filters = [{id:'all', en:'All Assets', ar:'كل الأصول'}, {id:'Loader', en:'Loaders', ar:'اللوادر'}, {id:'Grader', en:'Graders', ar:'الكريدر'}];
-            controls.innerHTML = filters.map(f => `<button onclick="renderFleet('${f.id}')" class="px-8 py-3 rounded-2xl border border-slate-200 text-[10px] font-black uppercase tracking-widest transition-all ${cat === f.id ? 'bg-slate-900 text-white' : 'bg-white text-slate-500'}">${currentLang === 'en' ? f.en : f.ar}</button>`).join('');
+            controls.innerHTML = filters.map(f => `
+                <button onclick="renderFleet('${f.id}')" class="px-10 py-4 rounded-2xl border border-slate-200 text-[11px] font-black uppercase tracking-widest transition-all ${cat === f.id ? 'bg-slate-900 text-white shadow-2xl' : 'bg-white text-slate-500 hover:bg-slate-100'}">
+                    ${currentLang === 'en' ? f.en : f.ar}
+                </button>
+            `).join('');
 
             const data = cat === 'all' ? fleetData : fleetData.filter(f => f.cat === cat);
             data.forEach(item => {
                 const name = currentLang === 'en' ? item.name : item.ar_name;
                 const specs = currentLang === 'en' ? item.specs : item.ar_specs;
-                grid.innerHTML += `<div class="premium-card p-12 rounded-[4rem] flex flex-col justify-between h-full"><div class="space-y-8"><div><i class="fas ${item.icon} text-4xl text-slate-900 mb-8 block"></i><h4 class="text-4xl font-900 uppercase tracking-tighter leading-none">${name}</h4></div><p class="text-sm text-slate-500 leading-relaxed font-medium">${specs}</p></div><div class="mt-10 pt-10 border-t border-slate-100 flex justify-between items-center"><span class="text-[11px] font-black uppercase text-[#D4AF37] tracking-widest">Technical Ready</span><i class="fas fa-chevron-right text-slate-300"></i></div></div>`;
+                grid.innerHTML += `
+                    <div class="premium-card p-12 rounded-[4rem] flex flex-col justify-between h-full">
+                        <div class="space-y-8">
+                            <div><i class="fas ${item.icon} text-4xl text-slate-900 mb-8 block"></i><h4 class="text-4xl font-900 uppercase tracking-tighter leading-none">${name}</h4></div>
+                            <p class="text-sm text-slate-500 font-medium leading-relaxed">${specs}</p>
+                        </div>
+                        <div class="mt-12 pt-10 border-t border-slate-100 flex justify-between items-center">
+                            <span class="text-[12px] font-black uppercase text-[#D4AF37] tracking-widest">Technical Ready</span>
+                            <i class="fas fa-chevron-right text-slate-300"></i>
+                        </div>
+                    </div>`;
             });
         }
 
@@ -396,7 +442,7 @@
             const body = document.getElementById('main-body');
             body.setAttribute('lang', currentLang);
             body.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
-            document.getElementById('lang-label').innerText = currentLang === 'en' ? 'ARABIC' : 'ENGLISH';
+            document.getElementById('lang-label').innerText = currentLang === 'en' ? 'Arabic' : 'English';
             document.querySelectorAll('[data-en]').forEach(el => {
                 const text = el.getAttribute(`data-${currentLang}`);
                 if (text) el.innerHTML = text;
@@ -405,7 +451,10 @@
             if (active === 'fleet') renderFleet(currentFilter);
         }
 
-        window.onload = () => { navigate('home'); };
+        // IMPROVED: Load immediately when HTML is ready
+        document.addEventListener('DOMContentLoaded', () => { 
+            navigate('home'); 
+        });
     </script>
 </body>
 </html>
